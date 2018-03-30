@@ -46,7 +46,7 @@ var nrj = ( function () {
 
             callback = Callback;
 
-            worker = new Worker('./build/Nrj.worker.js');
+            worker = new Worker('./build/nrj.worker.js');
             worker.onmessage = this.message;
             worker.postMessage = worker.webkitPostMessage || worker.postMessage;
 
@@ -54,7 +54,7 @@ var nrj = ( function () {
                 blob = document.location.href.replace(/\/[^/]*$/,"/") + ( isWasm ? "./build/wasm/energy.js" : "./build/asm/energy.js" );
                 //blob = isWasm ? document.location.href.replace(/\/[^/]*$/,"/") + "./build/wasm/energy.js" : document.location.href.replace(/\/[^/]*$/,"/") + "./build/asm/energy.js";
                 //blob = isWasm ? document.location.href.replace(/\/[^/]*$/,"/") + "./build/worker/js/energy.js" : document.location.href.replace(/\/[^/]*$/,"/") + "./build/asm/energy.js";
-                blob2 = document.location.href.replace(/\/[^/]*$/,"/") + "./build/Nrj.js";
+                blob2 = document.location.href.replace(/\/[^/]*$/,"/") + "./build/nrj.js";
             } else {
                 blob = extract.get('energy');
                 blob2 = extract.get('nrj');

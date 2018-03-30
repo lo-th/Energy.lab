@@ -30,7 +30,7 @@ function next () {
 
     intro.clear();
 
-    editor.init( launch, isWithCode, '#32f337' );
+    editor.init( launch, isWithCode, '#32f337', 'Energy.lab' );
     nrj.start();
 
     ready();
