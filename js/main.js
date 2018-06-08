@@ -37,6 +37,12 @@ function next () {
     
 }
 
+function unPause () {
+
+    nrj.start();
+
+}
+
 function ready () {
 
     var hash = location.hash.substr( 1 );

@@ -122,6 +122,8 @@ var nrj = ( function () {
 
         sendData: function ( stamp ){
 
+            if( view.pause ){ timer = null; return; }
+
             timer = requestAnimationFrame( nrj.sendData );
             time = stamp === undefined ? now() : stamp;
             delta = time - then;
