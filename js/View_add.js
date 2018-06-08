@@ -97,7 +97,7 @@ View.prototype.add = function ( o ) {
     mesh.quaternion.fromArray( o.quat );
 
     mesh.receiveShadow = true;
-    mesh.castShadow = true;
+    mesh.castShadow = o.density === 0 ? false : true;
 
     if( o.name ) mesh.name = o.name;
 
