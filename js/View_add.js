@@ -208,21 +208,6 @@ View.prototype.trimesh = function ( o ) {
 
 }
 
-View.prototype.updateTerrain = function (name){
-
-    var t = this.byName[ name ];
-
-    if(t.isWater){ t.local.y +=0.2; t.update() }
-    else t.easing();
-
-    var o = {
-        name:name,
-        heightData: t.heightData
-    }
-
-    nrj.send( 'terrain', o );
-
-}
 
 View.prototype.planet = function ( o ) {
 
@@ -237,13 +222,41 @@ View.prototype.planet = function ( o ) {
 
 }
 
+
+
+
+
+View.prototype.updateTerrain = function (name){
+
+    var t = this.byName[ name ];
+
+    if(t.isWater){ t.local.y +=0.2; t.update() }
+    else t.easing();
+
+    /*var o = {
+        name:name,
+        heightData: t.heightData
+    }
+
+    nrj.send( 'terrain', o );*/
+
+}
+
+
+
 View.prototype.terrain = function ( o ) {
 
     o.sample = o.sample == undefined ? [64,64] : o.sample;
     o.pos = o.pos == undefined ? [0,0,0] : o.pos;
     o.complexity = o.complexity == undefined ? 30 : o.complexity;
 
+    o.is64 = true;
+    o.isReverse = true;
+    o.isAbsolute = true;
+
     var mesh = new Terrain( o );
+
+    mesh.physicsUpdate = function () { nrj.send( 'terrain', { name:this.name, heightData:this.heightData } ) }
 
     mesh.position.fromArray( o.pos );
 
