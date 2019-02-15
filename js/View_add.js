@@ -254,7 +254,7 @@ View.prototype.terrain = function ( o ) {
     o.isReverse = true;
     o.isAbsolute = true;
 
-    var mesh = new Terrain( o );
+    var mesh = new THREE.Terrain( o );
 
     mesh.physicsUpdate = function () { nrj.send( 'terrain', { name:this.name, heightData:this.heightData } ) }
 

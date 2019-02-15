@@ -38,7 +38,7 @@ function demo () {
         sx = Math.rand(0.6, 2);
         sy = Math.rand(0.6, 2);
         sz = Math.rand(0.6, 2);
-        add({ type:'box', size:[sx,sy,sz], pos:[x,y,z], density:(sx+sy+sz)/3, name:'box'+i });//friction:0.5, bounce:0.6, 
+        add({ type:'box', size:[sx,sy,sz], pos:[x,y,z], density:(sx+sy+sz)/3, name:'box'+i, angular:1  });//friction:0.5, bounce:0.6, 
 
     }
 
