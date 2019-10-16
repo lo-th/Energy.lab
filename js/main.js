@@ -31,6 +31,7 @@ function next () {
     intro.clear();
 
     editor.init( launch, isWithCode, '#32f337', 'Energy.lab' );
+    view.setRefEditor( editor );
     nrj.start();
 
     ready();
