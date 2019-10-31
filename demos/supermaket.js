@@ -26,7 +26,7 @@ function demo() {
     for(j = 0; j<z; j++){
     for(i = 0; i<x; i++){
         pos = [ i*d + decaleX, (k*d + d)-0.5, j*d + decaleZ ];
-        add ({ type:'dice', size:[d,d,d], pos:pos, density:1, friction:0.5, bounce:0.1, disable:true });
+        add ({ type:'box', size:[d,d,d], pos:pos, density:1, friction:0.5, bounce:0.1, disable:true });
     }}}
 
     add({ type:'sphere', size:[s,s,s], pos:[0,100,0], density:10, friction:0.5, bounce:0.3 });

@@ -36,6 +36,7 @@ function next () {
 
     editor.init( launch, isWithCode, '#32f337', 'Energy.lab' );
     view.setEditor( editor );
+    view.setUser( user );
     view.unPause = unPause;
 
     nrj.start();
