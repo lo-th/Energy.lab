@@ -1,5 +1,5 @@
 var demos = [ 
-    'basic', 'tower', 'terrain', 'trimesh', 'building', 'car', 'ragdoll', 'asteroid', 'kinematic', 'water', 'mesh_test', 'kineBody'
+    'basic', 'tower', 'terrain', 'trimesh', 'supermaket', 'car', 'ragdoll', 'asteroid', 'kinematic', 'water', 'mesh_test', 'kineBody'
 ];
 
 demos.sort();
@@ -9,10 +9,11 @@ var demoName = 'basic';
 var isWithCode = false;
 var isWasm = false;
 var isDirect = true;
+var simulation;
 
 function init () {
 
-    view = new View();
+    //view = new View();
 
 	user.init();
 	view.init( initEnergy );
@@ -23,6 +24,9 @@ function init () {
 function initEnergy () {
 
     nrj.init( next, isWasm, isDirect );
+    simulation = new Simulation();
+
+    nrj.update = function(){ simulation.update() };
     
 }
 
@@ -31,7 +35,9 @@ function next () {
     intro.clear();
 
     editor.init( launch, isWithCode, '#32f337', 'Energy.lab' );
-    view.setRefEditor( editor );
+    view.setEditor( editor );
+    view.unPause = unPause;
+
     nrj.start();
 
     ready();
@@ -71,16 +77,16 @@ function launch ( name ) {
 function cam ( o ) { return view.moveCam( o ); };
 function follow ( name, o ) { return view.setFollow( name, o ); };
 
-function add ( o ) { return view.add( o ); };
-function joint ( o ) { return view.joint( o ); };
-function vehicle ( o ) { return view.vehicle( o ); };
+function add ( o ) { return simulation.add( o ); };
+function joint ( o ) { return simulation.joint( o ); };
+function vehicle ( o ) { return simulation.vehicle( o ); };
 
 function set ( o ) { return nrj.send( 'set', o ); };
 
 function motion ( o ) { return view.motion( o ); };
 function hideGrid () { return view.hideGrid(); };
 function control ( o ) { return nrj.send('control', o ); };
-function load ( name, callback ) { return view.load( name, callback  ); };
+function load ( name, callback ) { return view.load( name, callback ); };
 
 function matrix ( o ) { nrj.send('matrix', o ); };
 function matrixArray ( o ) { nrj.send('matrixArray', o ); };

@@ -39,6 +39,9 @@ var nrj = ( function () {
 
     nrj = {
 
+        update: function () {},
+        extraUpdate: function () {},
+
         init: function ( Callback, wasm, direct ) {
 
             isDirect = direct !== undefined ? direct : false;
@@ -114,7 +117,9 @@ var nrj = ( function () {
 
             if ( (time - 1000) > temp ){ temp = time; fps = count; count = 0; }; count++;
 
-            view.needUpdate( true );
+            //view.needUpdate( true );
+            this.extraUpdate();
+            this.update();
 
             stepNext = true;
             
@@ -162,7 +167,7 @@ var nrj = ( function () {
                window.cancelAnimationFrame( timer );
                timer = undefined;
             }
-            
+            this.extraUpdate = function () {};
             view.reset();
             
             worker.postMessage( { m:'reset', full:full });

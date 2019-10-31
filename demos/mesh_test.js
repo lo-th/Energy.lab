@@ -1,13 +1,14 @@
 function demo() {
 
-    cam ({azim:0, polar:30, distance:100});
-    view.loadObject ( 'cars', afterLoad );
+    cam ({theta:0, phi:30, distance:100, target:[0,1,0]});
+    view.load ( 'cars.sea', afterLoad, true );
 
 }
 
 function afterLoad () {
 
     set({
+
         isQuickStep: true,
         autoDisable: 1,
         samplesCount:10,
@@ -41,7 +42,11 @@ function afterLoad () {
         if(n.length == 1) n = '0'+n;
         if(n.length == 2) n = '0'+n;
 
-        var g = view.mergeMesh([view.geo['mcar'+n], view.geo['down'+n]])
+        var shape = view.getGeometry( 'cars', 'shape'+ n );
+        var chassis = view.getGeometry( 'cars', 'mcar'+ n );
+        var down = view.getGeometry( 'cars', 'down'+ n );
+
+        var g = view.mergeMesh([chassis, down])
 
         add( {
             type:'mesh',

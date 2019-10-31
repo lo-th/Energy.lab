@@ -1,8 +1,8 @@
 function demo () {
     
-    cam ({azim:0, polar:60, distance:40});
-
-    hideGrid();
+    view.moveCam({ theta:0, phi:60, distance:40, target:[0,0,0] });
+    view.addSky({ url:'milkyway.jpg', hdr:true, visible:true });
+    view.hideGrid();
 
 
     // world setting

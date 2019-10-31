@@ -1,12 +1,12 @@
 function demo() {
 
-    cam ({ azim:0, polar:30, distance:30 });
+    view.moveCam({ theta:0, phi:10, distance:30, target:[0,3,0] });
 
     set ({
         autoDisable:1,
         iteration:8,
         //disableLinear:0.05,
-        //disableAngular:0.05,
+        //disableAngular:1,
         //notificationInterval:10,
 
     });

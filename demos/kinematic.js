@@ -7,7 +7,7 @@ function demo() {
     // world setting
     set ({
         gravity:[0,-10,0],
-        iterations:20,
+        iterations:2,
         stepSize:1/60,
         
     })
@@ -21,7 +21,7 @@ function demo() {
 
     add({type:'box', pos:[0,3,0], size:[19,6, 3], name:'box', kinematic: true });
 
-    var i = 1000, pos = [], s, d;
+    var i = 600, pos = [], s, d;
 
     while( i-- ) {
 
@@ -35,7 +35,7 @@ function demo() {
         
     }
 
-    view.update = update;
+    nrj.extraUpdate = update;
 
 };
 

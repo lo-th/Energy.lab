@@ -46,6 +46,6 @@ function demo() {
 
 function update () {
 
-    view.updateTerrain('terra');
+    simulation.updateTerrain('terra');
 
 }

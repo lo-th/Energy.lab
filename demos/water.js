@@ -49,6 +49,6 @@ function demo() {
 
 function update () {
 
-    view.updateTerrain('water');
+    simulation.updateTerrain('water');
 
 }
