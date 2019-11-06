@@ -11,6 +11,8 @@ var isWasm = false;
 var isDirect = true;
 var simulation;
 
+var physic = null;
+
 function init () {
 
     //view = new View();
@@ -26,7 +28,9 @@ function initEnergy () {
     nrj.init( next, isWasm, isDirect );
     simulation = new Simulation();
 
-    nrj.update = function(){ simulation.update() };
+    physic = nrj;
+
+    physic.update = function(){ simulation.update() };
     
 }
 
@@ -34,12 +38,14 @@ function next () {
 
     intro.clear();
 
+    physic.setView( view );
+
     editor.init( launch, isWithCode, '#32f337', 'Energy.lab' );
     view.setEditor( editor );
     view.setUser( user );
     view.unPause = unPause;
 
-    nrj.start();
+    physic.start();
 
     ready();
     
@@ -47,7 +53,7 @@ function next () {
 
 function unPause () {
 
-    nrj.start();
+    physic.start();
 
 }
 
@@ -59,16 +65,15 @@ function ready () {
 
 };
 
-function launch ( name ) {
+function launch ( name, full ) {
 
-    var full = true;
+    /*var full = true;
     var hash = location.hash.substr( 1 );
     if( hash === name ) full = false;
 
-    location.hash = name;
+    location.hash = name;*/
 
-    nrj.reset( full );
-    
+    physic.reset( full );
     demo = new window['demo'];
 
 };
@@ -82,15 +87,15 @@ function add ( o ) { return simulation.add( o ); };
 function joint ( o ) { return simulation.joint( o ); };
 function vehicle ( o ) { return simulation.vehicle( o ); };
 
-function set ( o ) { return nrj.send( 'set', o ); };
+function set ( o ) { return physic.send( 'set', o ); };
 
 function motion ( o ) { return view.motion( o ); };
 function hideGrid () { return view.hideGrid(); };
-function control ( o ) { return nrj.send('control', o ); };
+function control ( o ) { return physic.send('control', o ); };
 function load ( name, callback ) { return view.load( name, callback ); };
 
-function matrix ( o ) { nrj.send('matrix', o ); };
-function matrixArray ( o ) { nrj.send('matrixArray', o ); };
+function matrix ( o ) { physic.send('matrix', o ); };
+function matrixArray ( o ) { physic.send('matrixArray', o ); };
 
-function force ( o ) { return nrj.send( 'force', o ); };
-function forceArray ( o ) { return nrj.send( 'forceArray', o ); };
+function force ( o ) { return physic.send( 'force', o ); };
+function forceArray ( o ) { return physic.send( 'forceArray', o ); };

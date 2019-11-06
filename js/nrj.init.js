@@ -37,10 +37,18 @@ var nrj = ( function () {
     var stepNext = false;
     var timer = undefined;
 
+    var refView = null;
+
     nrj = {
 
         update: function () {},
         extraUpdate: function () {},
+
+        setView: function ( v ) {
+
+            refView = v;
+
+        },
 
         init: function ( Callback, wasm, direct ) {
 
@@ -168,7 +176,7 @@ var nrj = ( function () {
                timer = undefined;
             }
             this.extraUpdate = function () {};
-            view.reset();
+            view.reset( full );
             
             worker.postMessage( { m:'reset', full:full });
 

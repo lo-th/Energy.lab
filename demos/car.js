@@ -56,5 +56,4 @@ function demo() {
     follow('car0_body', { rotation:-90 })
 
     
-    
 }
