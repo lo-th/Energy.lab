@@ -4,7 +4,29 @@ function Simulation(){
     this.bodys = view.getBody();
     this.solids = view.getSolid();
     this.geo = view.getGeo();
-    this.mat = view.getMat();
+
+    var wire = false;
+    var shadowSide = false;
+
+    this.mat = {
+
+                hide: new THREE.MeshBasicMaterial({ name: 'debug', color:0x000000, depthTest:false, depthWrite:false, visible:false }),
+
+                move: new THREE.MeshLambertMaterial( { color: 0xCCCCCC, name: 'move', wireframe: wire, shadowSide:shadowSide } ),
+                speed: new THREE.MeshLambertMaterial( { color: 0xFFCC33, name: 'speed', wireframe: wire, shadowSide:shadowSide } ),
+                sleep: new THREE.MeshLambertMaterial( { color: 0x33CCFF, name: 'sleep', wireframe: wire, shadowSide:shadowSide } ),
+                static: new THREE.MeshLambertMaterial( { color: 0x333333, name: 'static', wireframe: wire, shadowSide:shadowSide, transparent:true, opacity:0.3, depthTest:true, depthWrite:false } ),
+                kinematic: new THREE.MeshLambertMaterial( { color: 0x88FF33, name: 'kinematic', wireframe: wire, shadowSide:shadowSide } ),
+                soft: new THREE.MeshLambertMaterial({ name: 'soft', vertexColors:THREE.VertexColors, shadowSide:shadowSide }),
+
+                debug: new THREE.MeshBasicMaterial({ name: 'debug', color:0x00FF00, depthTest:false, depthWrite:false, wireframe:true, shadowSide:shadowSide }),
+
+
+                jointLine: new THREE.LineBasicMaterial( { name: 'jointLine', vertexColors: THREE.VertexColors, depthTest: false, depthWrite: false, transparent: true }),
+                jointP1: new THREE.MeshBasicMaterial({ name: 'jointP1', color:0x00FF00, depthTest:false, depthWrite:true, wireframe:true }),
+                jointP2: new THREE.MeshBasicMaterial({ name: 'jointP2', color:0xFFFF00, depthTest:false, depthWrite:true, wireframe:true }),
+
+            };
 
     /*this.mat['agent'] = new THREE.MeshBasicMaterial({ color:0x7caccc, wireframe:true });
     this.mat['agentHide'] = new THREE.MeshBasicMaterial({ color:0x7caccc, wireframe:true, transparent:true, opacity:0.1 });
@@ -99,13 +121,13 @@ Simulation.prototype = {
 
         var mesh;
 
-        if( o.type === 'plane' ) o.material = 'plane';
+        if( o.type === 'plane' ) o.material = 'hide';
 
         if( o.density === 0 && o.type==='box' ) o.type = 'hardbox';
 
         var material;
         if(o.material !== undefined) material = this.mat[o.material];
-        else material = o.density ? this.mat.move : this.mat.statique;
+        else material = o.density ? this.mat.move : this.mat.static;
 
         mesh = new THREE.Mesh( this.geo[o.type], material );
         if( o.type === 'plane' )  o.size = [10,10,10];
@@ -199,7 +221,7 @@ Simulation.prototype = {
 
             var material;
             if(o.material !== undefined) material = this.mat[o.material];
-            else material = o.density ? this.mat.move : this.mat.statique;
+            else material = o.density ? this.mat.move : this.mat.static;
 
             mesh = new THREE.Mesh( o.geometry, material );
             
